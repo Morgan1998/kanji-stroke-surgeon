@@ -25,7 +25,25 @@ function performSurgery(fileName) {
         const data = $(path).attr('d');
         if (data) {
             const cleanData = data.replace(/\s+/g, ' ').trim();
-            result += `<path d="${cleanData}" />`;
+
+            const textElement = $(`text:contains("${i + 1}")`);
+            
+            let x = "";
+            let y = "";
+
+            if (textElement.length > 0) {
+                const transform = $(textElement).attr('transform');
+                if (transform && transform.includes('matrix')) {
+                    const matrixValues = transform.match(/[-+]?[0-9]*\.?[0-9]+/g);
+                    if (matrixValues && matrixValues.length >= 6) {
+                        x = matrixValues[4];
+                        y = matrixValues[5];
+                    }
+                }
+            }
+            
+
+            result += `<path d="${cleanData}" data-x="${x}" data-y="${y}"></path>`;
         }
     });
 

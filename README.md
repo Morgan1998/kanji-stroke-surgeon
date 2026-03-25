@@ -17,4 +17,4 @@ When importing Kanji SVG data into Anki, browser parsers often "eject" `<path>` 
 4. **Operate:** Run the surgeon: `node surgeon.js`
 
 ### Why it was made
-KanjiVG already has a utility for this problem, so the purpose of making this tool was to practice making a similar tool via Node.js.
+KanjiVG already has a utility for this problem, so the purpose of making this tool is to practice making a similar tool via Node.js.
