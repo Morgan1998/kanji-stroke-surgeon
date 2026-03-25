@@ -1,5 +1,4 @@
 # kanji-stroke-surgeon
-
 A Node.js utility designed to perform "surgery" on messy Kanji SVG path data. 
 
 ### The Problem
@@ -18,4 +17,4 @@ When importing Kanji SVG data into Anki, browser parsers often "eject" `<path>` 
 4. **Operate:** Run the surgeon: `node surgeon.js`
 
 ### Why it was made
-Built to support automated Kanji study decks for JLPT N5/N4/N3/N2/N1 learners using Anki.
+KanjiVG already has a utility for this problem, so the purpose of making this tool was to practice making a similar tool via Node.js.

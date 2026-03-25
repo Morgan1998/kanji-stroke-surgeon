@@ -2,7 +2,7 @@
   "name": "kanji-stroke-surgeon",
   "version": "1.0.0",
   "description": "A Node.js utility to clean up raw kanji SVG path data sets",
-  "main": "index.js",
+  "main": "surgeon.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,9 +11,9 @@
     "url": "git+https://github.com/Morgan1998/kanji-stroke-surgeon.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Morgan Campbell",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/Morgan1998/kanji-stroke-surgeon/issues"
   },

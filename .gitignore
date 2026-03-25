@@ -144,3 +144,4 @@ output/
 
 # IDE / AI Extension metadata
 .qodo/
+.vscode/
