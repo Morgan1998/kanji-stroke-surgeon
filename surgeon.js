@@ -8,7 +8,6 @@ folders.forEach(function(folder) {
 });
 
 function performSurgery(fileName) {
-    console.log(`\n🩺 Opening file to perform surgery on: ${fileName}`);
 
     const filepath = `./raw-data/${fileName}`;
     
@@ -28,8 +27,8 @@ function performSurgery(fileName) {
 
             const textElement = $(`text:contains("${i + 1}")`);
             
-            let x = "";
-            let y = "";
+            let x = '';
+            let y = '';
 
             if (textElement.length > 0) {
                 const transform = $(textElement).attr('transform');
@@ -47,14 +46,42 @@ function performSurgery(fileName) {
         }
     });
 
-    console.log(`\n✅ Surgery Complete! Here is your clean data:`);
-    console.log("--------------------------------------------");
-    console.log(result);
-    console.log("--------------------------------------------");
+    return result;
 }
 
-try {
-    performSurgery('0f9a8.svg'); 
-} catch (err) {
-    console.error(`❌ ERROR: ${err.message}`);
+function runBatchSurgery() {
+    const rawDataPath = './raw-data';
+    const files = fs.readdirSync(rawDataPath);
+    const svgFiles = files.filter(function(file) { 
+        return file.endsWith('.svg');
+    });
+
+    let masterTSV = '';
+
+    console.log(`🚀 Starting Batch Surgery on ${svgFiles.length} files...`);
+
+    svgFiles.forEach((file, index) => {
+
+        const percent = Math.round(((index + 1) / svgFiles.length) * 100);
+        process.stdout.write(`\r[${percent}%] 🩺 Operating on: ${file}           `);
+
+        const surgeryResult = performSurgery(file);
+
+        const hexName = file.replace('.svg', '');
+
+        let kanjiName;
+        try {
+            kanjiName = String.fromCodePoint(parseInt(hexName, 16));
+        } catch (err) {
+            kanjiName = hexName;
+        }
+
+        masterTSV += `${kanjiName}\t${surgeryResult}\n`;
+
+    });
+
+    fs.writeFileSync('./output/n2-kanji-batch.tsv', masterTSV);
+    console.log(`\n\n🎉 Done! Saved ${svgFiles.length} Kanji to ./output/n2-kanji-batch.tsv`);
 }
+
+runBatchSurgery();
